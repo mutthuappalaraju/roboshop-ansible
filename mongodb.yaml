@@ -39,7 +39,7 @@
         register: product_count
 
      - name: load catalogue data
-       ansible.builtin.command: mongo --host mongodb.2512raju.online < /app/schema/catalogue.js
+       ansible.builtin.shell: mongo --host mongodb.2512raju.online < /app/schema/catalogue.js
        when: product_count.stdout == "0"
 
      - name: start and enable catalogue
