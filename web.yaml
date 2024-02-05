@@ -9,7 +9,7 @@
 
     - name: Remove the html package
       ansible.builtin.package:
-        name: /usr/share/nginx/html/*
+        name: /usr/share/nginx/html
         state: absent 
 
     - name: create html directory
