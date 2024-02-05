@@ -1,0 +1,37 @@
+- name: redis component
+  hosts: redis
+  become: yes
+  tasks:
+    - name: install remi relase
+      ansible.builtin.package: 
+        name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm 
+        state: present 
+
+    - name: enable redis
+      ansible.builtin.command: dnf module enable redis:remi-6.2
+
+    - name: install remi relase
+      ansible.builtin.package: 
+        name: dnf install redis
+        state: present 
+
+    - name: Replace old hostname with new hostname (requires Ansible >= 2.4)
+      ansible.builtin.replace:    
+        path: /etc/redis/redis.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'   
+
+    - name: start and enable roboshop web
+      ansible.builtin.systemd_service:    
+        name: redis
+        state: restarted
+        enabled: true 
+                          
+       
+
+    
+
+
+    
+        
+   
